@@ -1,0 +1,397 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<string.h>
+#include <windows.h>
+void SetPosition(int X, int Y)
+{
+HANDLE Screen;
+Screen = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD Position={X, Y};
+
+SetConsoleCursorPosition(Screen, Position);
+}
+int inonly()
+{
+    int num = 0;
+    char ch;
+    do{
+        ch = getch();
+        if(ch>=48 && ch<=57)
+        {
+            printf("%c",ch);
+            num = num*10 +(ch-48);
+        }
+        else
+            break;
+    }while(1);
+    return(num);
+    }
+
+
+int i=0;
+struct payment
+{
+    char name[45];
+    char mob[15];
+    char password[20];
+    char email[50];
+    int amount;
+    int addAmount;
+}w[100];
+
+
+void about()
+{
+
+}
+void pay()
+{
+long m;
+int a ;
+
+SetPosition(39,2);
+printf("Send Money To (\+91)\: ");
+scanf("%d",&m);
+SetPosition(39,3);
+printf("______________________________________");
+SetPosition(39,5);
+printf("Amount (\in Rs.)\ : ");
+scanf("%d",&a);
+SetPosition(39,6);
+printf("______________________________________");
+SetPosition(50,8);
+printf("Send Money");
+getch();
+system("cls");
+SetPosition(39,5);
+printf("YOU HAVE PAYED %d Rs. TO %ld",a,m);
+SetPosition(39,6);
+printf("************************************");
+getch();
+
+}
+void request()
+{
+     int s[10];
+     int a;
+     SetPosition(46,1);
+     printf("REQUEST MONEY");
+     SetPosition(39,2);
+     printf("*****************************");
+     SetPosition(39,4);
+     printf("Request Money From (\+91)\: ");
+     scanf("%s", &s);
+     SetPosition(39,6);
+     printf("_____________________________________");
+     SetPosition(39,8);
+     printf("Amount (\in Rs.)\ :");
+     scanf("%d", &a);
+     SetPosition(39,9);
+     printf("_____________________________________");
+     SetPosition(50,12);
+     printf("REQUEST MONEY");
+     SetPosition(39, 15);
+     system("pause");
+     system("cls");
+
+     SetPosition(39,10);
+     printf("YOUR REQUEST FROM %s HAS BEEN SUBMITTED",s);
+
+     SetPosition(39,11);
+     printf("************************************************");
+     SetPosition(39, 15);
+     system("pause");
+     system("cls");
+
+}
+void add()
+{
+    printf("\n\n\t\t\t\t\tPAYMENTO\n\n\n");
+    printf("SECURELY ADD MONEY FOR PAYMENTO FROM BELOW METHODS : \n\n");
+    printf("BANK ACCOUNT   : 2234 4343 4555 4544\n");
+    printf("PAYTM ACCOUNT  : 8847854430\n");
+    printf("BHIM ACCOUNT   : 9658082655\n");
+    printf("OR DICETLY PAY TO :\n");
+    printf("    PRAVEEN KUMAR (1st Year IIITV)\n");
+    printf("    SANDEEP PRADHAN (1st Year IIITV)\n");
+    printf("    VARNIKA DASGUPTA (1st Year IIITV)\n");
+    printf("    ABHYUDAY TRIPATHI (1st Year IIITV)\n\n\n");
+    printf("ENTER THE AMOUNT TO ADD IN YOUR ACCOUNT\tRs.");
+    int a;
+    scanf("%d",&a);
+    w[i].addAmount+=a;
+    system("pause");
+    system("cls");
+    printf("\n\n\nTRANFERED MONEY WILL BE REFLECTED IN YOUR ACCOUNT SHORTLY\n\n");
+    printf("Have a Nice Day Ahead\n\n\n\n");
+    system("pause");
+    system("cls");
+}
+void profile()
+{
+
+}
+void offer()
+{
+
+}
+void feedback()
+{
+
+}
+void invite()
+{
+
+}
+void exito()
+{
+    exit(0);
+}
+
+void money()
+{
+    w[i].amount=0;
+}
+
+void login()
+{
+    FILE *fp;
+	SetPosition(50,4);
+	printf("LOGIN");
+	SetPosition(50,5);
+	printf("=====");
+	fp=fopen("payment.txt","ab+");
+
+	char iname[50];
+	char ipass[20];
+	SetPosition(43,7);
+	printf("USER NAME :   ");
+	scanf("%s",iname);
+	i=0;
+	int count=0;
+	while(!feof(fp))
+        {
+          fread(&w[i],sizeof(w[i]),1,fp);
+          if(strcmp(iname,w[i].name)==0)
+            {
+            	count=1;
+           		break;
+        	}
+        	i++;
+        }
+    if(count==1)
+	{
+		SetPosition(43,9);
+		printf("PASSWORD  :   ");
+		scanf("%s",ipass);
+		if(strcmp(w[i].password,ipass)==0)
+            {   SetPosition(50,11);
+                printf("YOU HAVE BEEN SUCCESSFULLY LOGIN");
+                SetPosition(39,14);
+                system("pause");
+            }
+        else
+        {
+            SetPosition(50,11);
+            printf("WRONG PASSWORD");
+            SetPosition(54,12);
+            printf("TRY AGAIN");
+            SetPosition(39,14);
+            system("pause");
+            system("cls");
+            login();
+        }
+
+
+	}
+	else
+    {
+        SetPosition(43,9);
+        printf("!!! USERNAME NOT FOUND !!!");
+        SetPosition(43,10);
+        printf("**************************");
+        SetPosition(43,15);
+        printf("Press ENTER to TRY AGAIN");
+         SetPosition(43,16);
+         printf("________________________");
+        SetPosition(43,19);
+        system("pause");
+        system("cls");
+        login();
+    }
+      fclose(fp);
+}
+
+void reg()
+{
+	FILE *fp;
+	char iname[50];
+	char c;
+	char ipass[20];
+	char imob[10];
+	char iemail[50];
+
+	fp=fopen("payment.txt","ab+");
+
+	printf("\n\n\t\t\t REGISTRATION\n");
+	printf("\t\t\t ============\n\n\n");
+	printf("USER NAME :   ");
+	scanf("%s",iname);
+	i=0;
+	int count=0;
+	while(!feof(fp))
+        {
+          fread(&w[i],sizeof(w[i]),1,fp);
+          if(strcmp(iname,w[i].name)==0)
+            {
+            	count=1;
+           		printf("\n\n\t\t\tUSERNAME ALREDY EXISTS\n\n");
+        	    system("pause");
+            	system("cls");
+           		reg();
+        	}
+        	i++;
+        }
+        int z=0;
+    if(count==0)
+	{
+	    strcpy(w[i].name,iname);
+		printf("\nPASSWORD  :   ");
+		while((c=getch())!=13)
+        {
+          ipass[z]=c;
+          z++;
+          printf("%c",'*');
+        }
+        strcpy(w[i].password,ipass);
+		printf("\nMOBILE NO. : (+91)");
+		scanf("%s",imob);
+		printf("\nMAIL ID :   ");
+		scanf("%s",iemail);
+		strcpy(w[i].mob,imob);
+		strcpy(w[i].email,iemail);
+		fwrite(&w[i],sizeof(w[i]),1,fp);
+		w[i].amount=0;
+		system("cls");
+		printf("\n\n\n\tCONGRATULATION !!  YOU HAVE BEEN SUCCESSFULLY REGISTERED\n\n");
+      fclose(fp);
+
+	}
+
+
+}
+
+
+    void welcome()
+    {
+        system("cls");
+        SetPosition(50,3);
+        printf("**********************");
+        SetPosition(50,4);
+        printf("* WELCOME TO PAYMENTO *");
+        SetPosition(50,5);
+        printf("**********************");
+        SetPosition(1,20);
+        printf("DEVELOPED BY :");
+        printf("\n   PRAVEEN KUMAR");
+        printf("\n   SANDEEP PRADHAN");
+        printf("\n   VARNIKA DASGUPTA");
+        printf("\n   ABHYUDAY TRIPATHI\n\n");
+    }
+
+    void enter()
+    {
+        int n;
+        XY:
+        SetPosition(39,4);
+        printf("1. LOGIN");
+        SetPosition(39,5);
+        printf("2. REGISTER");
+        SetPosition(39,6);
+        printf("3. ENTER AS GUEST");
+        SetPosition(39,9);
+        printf("ENTER YOUR CHOICE: ");
+        scanf("%d",&n);
+        switch(n)
+        {
+            case 1: system("cls");
+                login();
+                break;
+            case 2: system("cls");
+                reg();
+                break;
+            case 3: system("cls");
+                break;
+            default: printf("\n\n\t\t\t\tNO MATCH FOUND");
+                printf("\n\n\t\t\tPress Enter to re-Enter the choice\n\n");
+                system("pause");
+                system("cls");
+                goto XY;
+        }
+    }
+
+    void menu()
+    {
+        int choice;
+        system("cls");
+        printf("\n\n\n\t\t\t\t\t\t\t\t\t  Hi  ");
+            puts(w[i].name);
+
+        printf("\n\n\n\t\t\t\t\t\t 1- ADD MONEY       2- PAY MONEY             3- REQUEST MONEY  ");
+        printf("\n\n\n\t\t\t\t\t\t 4- PROFILE         5- OFFERS                6- FEEDBACK   ");
+        printf("\n\n\n\t\t\t\t\t\t 7- INVITE          8-EXIT");
+        printf("\n\n\n\t\t\t\t\t\t\t\t 0-ABOUT US  \n\n\n");
+        printf("ENTER YOUR CHOICE  ");
+        scanf("%d",&choice);
+        system("cls");
+
+
+        switch(choice)
+        {
+            case 0:   about();
+                break;
+
+            case 1:   add();
+                break;
+
+            case 2:   pay();
+                break;
+
+            case 3:   request();
+                break;
+
+            case 4:   profile();
+                break;
+
+            case 5:   offer();
+                break;
+
+            case 6:   feedback();
+                break;
+
+            case 7:   invite();
+                break;
+
+            case 8:   exito();
+                break;
+
+        }
+
+    }
+
+
+
+int main()
+{
+    welcome();
+    system("pause");
+    system("cls");
+    enter();
+    money();
+        while(1)
+            menu();
+    return 0;
+}
+
+
+
